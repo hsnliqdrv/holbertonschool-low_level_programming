@@ -12,8 +12,8 @@ void times_table(void)
 		k = 0;
 		for (j = 0; j < 10; j++)
 		{
-			k += i;
-			_putchar('0' + k / 10);
+			if (k >= 10)
+				_putchar('0' + k / 10);
 			_putchar('0' + k % 10);
 			if (j == 9)
 				_putchar('\n');
@@ -22,6 +22,7 @@ void times_table(void)
 				_putchar(',');
 				_putchar(' ');
 			}
+			k += i;
 		}
 	}
 }
