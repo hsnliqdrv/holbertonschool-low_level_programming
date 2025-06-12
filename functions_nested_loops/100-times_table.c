@@ -6,7 +6,7 @@
  */
 void print_times_table(int n)
 {
-	int i, j, k;
+	int i, j, k. a, b;
 
 	if (n > 15 || n < 0)
 		return;
@@ -16,10 +16,14 @@ void print_times_table(int n)
 		k = 0;
 		for (j = 0; j < n + 1; j++)
 		{
-			if (k >= 10)
-				_putchar('0' + k / 10);
-			else if (j != 0)
-				_putchar(' ');
+			a = k / 100;
+			b = k / 10;
+			c = k % 10;
+			if (j > 0)
+			{
+				_putchar(a ? '0' + a : ' ');
+				_putchar(a || b ? '0' + b : ' ');
+			}
 			_putchar('0' + k % 10);
 			if (j == n)
 				_putchar('\n');
