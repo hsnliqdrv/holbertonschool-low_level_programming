@@ -17,3 +17,13 @@ void sum_of_multiples(void)
 	}
 	printf("%d\n", sum);
 }
+
+/**
+ * main - the main function
+ * Return: 0
+ */
+int main(void)
+{
+	sum_of_multiples();
+	return (0);
+}
