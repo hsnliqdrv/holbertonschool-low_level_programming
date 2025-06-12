@@ -17,7 +17,7 @@ void print_times_table(int n)
 		for (j = 0; j < n + 1; j++)
 		{
 			a = k / 100;
-			b = k / 10;
+			b = k / 10 % 10;
 			c = k % 10;
 			if (j > 0)
 			{
