@@ -23,18 +23,18 @@ int first_digit(int n)
 int main(void)
 {
 	int i = 0, k;
-	int a = 0, b = 1;
+	long int a = 0, b = 1;
 
 	while (i < 50)
 	{
 		k = first_digit(a);
-		if (k == 1 || k == 2)
+		if (k == 1 || k == 2 || 1)
 		{
 			i++;
 			if (i == 50)
-				printf("%d\n", a);
+				printf("%ld\n", a + b);
 			else
-				printf("%d, ", a);
+				printf("%ld, ", a + b);
 		}
 		b = a + b;
 		a = b - a;
