@@ -14,3 +14,4 @@ void print_to_98(int n);
 void print_times_table(int n);
 void sum_of_multiples(void);
 int first_digit(int n);
+int pow_of_ten(int b);
