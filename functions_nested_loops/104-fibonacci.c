@@ -3,7 +3,7 @@
 
 /**
  * pow_of_ten - power of 10
- * @b - second op
+ * @b: second op
  *
  * Return: 10^b
  */
@@ -16,7 +16,7 @@ int pow_of_ten(int b)
 	{
 		a *= 10;
 	}
-	
+
 	return (a);
 }
 
@@ -26,11 +26,9 @@ int pow_of_ten(int b)
  */
 int main(void)
 {
-	int n = 5;
-	int i = 0;
 	unsigned long a = 0, b = 1, t;
+	int n = 5, i = 0, j, z, g;
 	int c = a % pow_of_ten(n), d = b % pow_of_ten(n);
-	int j, z, g;
 
 	a /= pow_of_ten(n);
 	b /= pow_of_ten(n);
@@ -38,7 +36,6 @@ int main(void)
 	{
 		g = 0;
 		i++;
-		
 		t = a + b + (c + d) / pow_of_ten(n);
 		if (t > 0)
 		{
@@ -54,8 +51,6 @@ int main(void)
 				printf("%d", z);
 			}
 		}
-
-
 		if (i == 98)
 			printf("\n");
 		else
