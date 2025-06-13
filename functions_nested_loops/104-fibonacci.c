@@ -30,17 +30,31 @@ int main(void)
 	int i = 0;
 	unsigned long a = 0, b = 1, t;
 	int c = a % pow_of_ten(n), d = b % pow_of_ten(n);
+	int j, z, g;
 
 	a /= pow_of_ten(n);
 	b /= pow_of_ten(n);
 	while (i < 98)
 	{
+		g = 0;
 		i++;
 		
 		t = a + b + (c + d) / pow_of_ten(n);
 		if (t > 0)
+		{
+			g++;
 			printf("%lu", t);
-		printf("%d", (c + d) % pow_of_ten(n));
+		}
+		for (j = n - 1; j >= 0; j--)
+		{
+			z = ((c + d) / pow_of_ten(j)) % 10;
+			if (g || z)
+			{
+				g++;
+				printf("%d", z);
+			}
+		}
+
 
 		if (i == 98)
 			printf("\n");
