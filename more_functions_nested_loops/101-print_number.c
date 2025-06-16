@@ -11,7 +11,6 @@ void print_number(int n)
 	if (n < 0)
 	{
 		_putchar('-');
-		n = -n;
 	}
 	if (n == 0)
 	{
@@ -21,7 +20,8 @@ void print_number(int n)
 	for (i = 1000000000; i > 0; i /= 10)
 	{
 		k = n / i % 10;
-
+		if (k < 0)
+			k = -k;
 		if (k || j)
 		{
 			_putchar('0' + k);
