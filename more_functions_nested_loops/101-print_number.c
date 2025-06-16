@@ -1,5 +1,4 @@
 #include "main.h"
-#include <math.h>
 
 /**
  * print_number - print numbers
