@@ -50,8 +50,7 @@ int _atoi(char *s)
 		end = l;
 	for (i = begin; i < end; i++)
 	{
-		result += _pow(10, (end - i - 1)) * (s[i] - '0');
+		result += sign * (_pow(10, (end - i - 1)) * (s[i] - '0'));
 	}
-	result *= sign;
 	return (result);
 }
