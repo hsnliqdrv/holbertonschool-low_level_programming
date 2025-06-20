@@ -33,8 +33,6 @@ char *cap_string(char *s)
 	{
 		if ((wassep) && (s[i] >= 'a' && s[i] <= 'z'))
 			s[i] -= 32;
-		if (s[i] == '\t')
-			s[i] = ' ';
 		wassep = issep(s[i]);
 		i++;
 	}
