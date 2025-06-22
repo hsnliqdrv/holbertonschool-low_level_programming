@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdio.h>
+
 /**
  * print_number - prints an int
  * @n: integer
@@ -19,7 +19,7 @@ void print_number(int n)
 		return;
 	}
 	while (d != 0)
-	{ 
+	{
 		k = sign * (n / d % 10);
 		if (k == 0)
 		{
