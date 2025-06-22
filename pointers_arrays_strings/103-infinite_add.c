@@ -9,10 +9,10 @@
 int len(char *s)
 {
 	int l = 0;
-	
+
 	while (s[l])
 		l++;
-	return l;
+	return (l);
 }
 /**
  * infinite_add - addition
@@ -42,12 +42,9 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	a = l1 - j >= 1 ? n1[l1 - j - 1] - '0' : 0;
 	b = l2 - j >= 1 ? n2[l2 - j - 1] - '0' : 0;
 	if (a + b + d > 0)
-		return 0;
-	else
-	{
-		f = r;
-		while (*f == '0' && f < r + size_r - 2)
-			f++;
-		return f;
-	}
+		return (0);
+	f = r;
+	while (*f == '0' && f < r + size_r - 2)
+		f++;
+	return (f);
 }
