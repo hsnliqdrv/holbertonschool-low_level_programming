@@ -41,6 +41,10 @@ int equals(char *a, char *b, int n)
  */
 char *_strstr(char *haystack, char *needle)
 {
+	if (length(needle) == 0)
+	{
+		return (haystack);
+	}
 	while (*(haystack + length(needle) - 1))
 	{
 		if (equals(haystack++, needle, length(needle)))
