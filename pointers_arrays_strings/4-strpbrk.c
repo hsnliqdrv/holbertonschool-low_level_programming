@@ -32,5 +32,5 @@ char *_strpbrk(char *s, char *accept)
 		if (contains(accept, *s++))
 			return (s - 1);
 	}
-	return (s);
+	return (0);
 }
