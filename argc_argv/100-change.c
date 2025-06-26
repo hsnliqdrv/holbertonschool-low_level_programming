@@ -35,7 +35,8 @@ int minimum_cents(int m, int *cents, int n)
 	for (i = 0; i < n; i++)
 	{
 		if (cents[i] <= m)
-			return (1 + minimum_cents(m - cents[i], cents, n));
+			return (m / cents[i] + minimum_cents(m % cents[i], cents, n));
+
 	}
 	return (0);
 }
@@ -57,6 +58,7 @@ int main(int argc, char **argv)
 		puts("Error");
 		return (1);
 	}
+
 	if (!is_digits(argv[1]))
 	{
 		puts("Error");
