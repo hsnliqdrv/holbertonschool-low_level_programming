@@ -11,7 +11,7 @@ int is_digits(char *s)
 {
 	while (*s)
 	{
-		if (!(*s <= '9' && *s >= '0'))
+		if (!((*s <= '9' && *s >= '0') || *s == '-'))
 			return (0);
 		s++;
 	}
