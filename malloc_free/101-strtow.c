@@ -68,7 +68,7 @@ char **strtow(char *str)
 
 	if (!str || count(str) == 0)
 		return (NULL);
-	words = malloc(sizeof(char *) * count(str) + 1);
+	words = malloc(sizeof(char *) * (count(str) + 1));
 	if (!words)
 		return (NULL);
 	while (str[i])
