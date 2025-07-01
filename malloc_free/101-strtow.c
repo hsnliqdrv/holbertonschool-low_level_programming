@@ -66,7 +66,7 @@ char **strtow(char *str)
 	char **words;
 	char *ss = NULL;
 
-	if (!str)
+	if (!str || !(*str))
 		return (NULL);
 	words = malloc(sizeof(char *) * count(str) + 1);
 	if (!words)
@@ -78,11 +78,11 @@ char **strtow(char *str)
 			if (l == -1)
 				l = i;
 		}
-		else
+		if (str[i] == ' ' || !(str[i + 1]))
 		{
 			if (l >= 0)
 			{
-				ss = _strndup(str + l, i - l);
+				ss = _strndup(str + l, i - l + !(str[i + 1]));
 				if (!ss)
 				{
 					for (d = 0; d < m; d++)
