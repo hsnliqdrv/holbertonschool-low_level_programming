@@ -52,6 +52,24 @@ int len(char *s)
 	return (l);
 }
 /**
+ * trim_zeros - trims zeros from start
+ * @s: string
+ *
+ * Return: new string
+ */
+char *trim_zeros(char *s)
+{
+	int i = 0;
+
+	while (s[i] == '0')
+	{
+		i++;
+	}
+	if ((len(s) == i) && (i > 0))
+		i--;
+	return (_strdup(s + i));
+}
+/**
  * add_zeros - addes zeros to end of string
  * @s: string
  * @z: number of zeros
@@ -203,7 +221,7 @@ int isonlydigits(char *s)
  */
 int main(int argc, char **argv)
 {
-	char *s;
+	char *s, *ss;
 
 	if (argc != 3)
 	{
@@ -216,8 +234,10 @@ int main(int argc, char **argv)
 		return (98);
 	}
 	s = mul(argv[1], argv[2]);
-	print(s);
+	ss = trim_zeros(s);
+	print(ss);
 	_putchar('\n');
 	free(s);
+	free(ss);
 	return (0);
 }
