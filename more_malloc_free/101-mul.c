@@ -157,8 +157,7 @@ char *_mul(char *s, char d)
 		ss = add(r, s);
 		if (!ss)
 			return (NULL);
-		if (i > 0)
-			free(r);
+		free(r);
 		r = ss;
 	}
 	return (r);
@@ -174,18 +173,21 @@ char *_mul(char *s, char d)
 char *mul(char *s1, char *s2)
 {
 	int l2 = len(s2), i;
-	char *r = "0", *a, *b, *c;
+	char *r, *a, *b, *c;
+
+	r = malloc(2);
+	r[0] = '0';
+	r[1] = '\0';
 
 	for (i = l2 - 1; i >= 0; i--)
 	{
 		a = _mul(s1, s2[i]);
 		b = add_zeros(a, l2 - i - 1);
 		c = add(r, b);
+		if (a != b)
+			free(a);
 		free(b);
-		if (i < l2 - 1)
-		{
-			free(r);
-		}
+		free(r);
 		r = c;
 	}
 
