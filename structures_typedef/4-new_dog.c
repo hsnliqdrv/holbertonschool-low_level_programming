@@ -11,7 +11,8 @@ int _strlen(char *s)
 {
 	int l = 0;
 
-	while (s[l++]);
+	while (s[l])
+		l++;
 	return (l);
 }
 /**
@@ -47,7 +48,18 @@ dog_t *new_dog(char *name, float age, char *owner)
 	if (ptr == NULL)
 		return (NULL);
 	ptr->name = _strdup(name);
+	if (ptr->name == NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
 	ptr->age = age;
 	ptr->owner = _strdup(owner);
+	if (ptr->owner == NULL)
+	{
+		free(ptr->name);
+		free(ptr);
+		return (NULL);
+	}
 	return (ptr);
 }
