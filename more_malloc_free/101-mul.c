@@ -184,8 +184,6 @@ char *mul(char *s1, char *s2)
 		a = _mul(s1, s2[i]);
 		b = add_zeros(a, l2 - i - 1);
 		c = add(r, b);
-		if (a != b)
-			free(a);
 		free(b);
 		free(r);
 		r = c;
