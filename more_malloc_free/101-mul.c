@@ -105,33 +105,20 @@ void zero(char *s, int size)
  * add - addition
  * @n1: first number
  * @n2: second number
- *
- * Return: resulting number
+ * @f: output string
  */
-char *add(char *n1, char *n2)
+void add(char *n1, char *n2, char *f)
 {
-	int d = 0, a, b, i, j;
-	int l1 = len(n1), l2 = len(n2);
-	int size = l1 > l2 ? l1 + 1 : l2 + 1;
-	char *f = malloc(size + 1), *s;
+	int l1 = len(n1), l2 = len(n2), a, b, c = 0;
+	int l = len(f), i;
 
-	f[size] = '\0';
-	zero(f, size);
-	for (i = 1; i < size + 1; i++)
+	for (i = l - 1; i >= 0; i--)
 	{
-		j = i - 1;
-		a = l1 - j >= 1 ? n1[l1 - j - 1] - '0' : 0;
-		b = l2 - j >= 1 ? n2[l2 - j - 1] - '0' : 0;
-		f[size - i] = '0' + (a + b + d) % 10;
-		d = (a + b + d) / 10;
+		a = l1 - l + i >= 0 ? n1[l1 - l + i] - '0' : 0;
+		b = l2 - l + i >= 0 ? n2[l2 - l + i] - '0' : 0;
+		f[i] = '0' + (a + b + c) % 10;
+		c = (a + b + c) / 10;
 	}
-	if (*f == '0')
-	{
-		s = _strdup(f + 1);
-		free(f);
-		f = s;
-	}
-	return (f);
 }
 
 /**
@@ -145,21 +132,17 @@ char *add(char *n1, char *n2)
 
 char *_mul(char *s, char d)
 {
-	int n = d - '0', i;
-	char *r, *ss;
-
-	r = malloc(2);
-	r[0] = '0';
-	r[1] = '\0';
-
-	for (i = 0; i < n; i++)
+	int l = len(s), i, a, b = d - '0', c = 0;
+	char *r = malloc(l + 2);
+	r[l + 1] = '\0';
+	zero(r, l + 1);
+	for (i = l - 1; i >= 0; i--)
 	{
-		ss = add(r, s);
-		if (!ss)
-			return (NULL);
-		free(r);
-		r = ss;
+		a = s[i] - '0';
+		r[i + 1] = '0' + ((a * b + c) % 10);
+		c = (a * b + c) / 10;
 	}
+	r[0] += c;
 	return (r);
 }
 
@@ -172,21 +155,19 @@ char *_mul(char *s, char d)
  */
 char *mul(char *s1, char *s2)
 {
-	int l2 = len(s2), i;
-	char *r, *a, *b, *c;
+	int l1 = len(s1), l2 = len(s2), i;
+	char *r, *a, *b;
 
-	r = malloc(2);
-	r[0] = '0';
-	r[1] = '\0';
+	r = malloc(l1 + l2 + 1);
+	r[l1 + l2] = '\0';
+	zero(r, l1 + l2);
 
 	for (i = l2 - 1; i >= 0; i--)
 	{
 		a = _mul(s1, s2[i]);
 		b = add_zeros(a, l2 - i - 1);
-		c = add(r, b);
+		add(r, b, r);
 		free(b);
-		free(r);
-		r = c;
 	}
 
 	return (r);
