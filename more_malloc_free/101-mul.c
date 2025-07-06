@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -76,16 +77,21 @@ char *trim_zeros(char *s)
  *
  * Return: new string
  */
-char *add_zeros(char *s, int z)
+void add_zeros(char *s, int z)
 {
-	int ls = len(s);
-	int l = ls + z, i;
+	int i = 0;
 
-	s = realloc(s, l + 1);
-	for (i = ls; i < l; i++)
+	if (z == 0)
+		return;
+	while (s[i] == '0')
+		i++;
+
+	while (s[i])
+	{
+		s[i - z] = s[i];
 		s[i] = '0';
-	s[l] = '\0';
-	return (s);
+		i++;
+	}
 }
 
 /**
@@ -130,21 +136,16 @@ void add(char *n1, char *n2, char *f)
  * Return: result of multiplication
  */
 
-char *_mul(char *s, char d)
+void _mul(char *s, char d, char *r)
 {
-	int l = len(s), i, a, b = d - '0', c = 0;
-	char *r = malloc(l + 2);
+	int i, lr = len(r), ls = len(s), a, b = d - '0', c = 0;
 
-	r[l + 1] = '\0';
-	zero(r, l + 1);
-	for (i = l - 1; i >= 0; i--)
+	for (i = lr - 1; i >= 0; i--)
 	{
-		a = s[i] - '0';
-		r[i + 1] = '0' + ((a * b + c) % 10);
+		a = (ls - lr + i) >= 0 ? s[ls - lr + i] - '0' : 0;
+		r[i] = '0' + (a * b + c) % 10;
 		c = (a * b + c) / 10;
 	}
-	r[0] += c;
-	return (r);
 }
 
 /**
@@ -157,20 +158,22 @@ char *_mul(char *s, char d)
 char *mul(char *s1, char *s2)
 {
 	int l1 = len(s1), l2 = len(s2), i;
-	char *r, *a, *b;
+	char *r, *a;
 
 	r = malloc(l1 + l2 + 1);
 	r[l1 + l2] = '\0';
 	zero(r, l1 + l2);
+	a = _strdup(r);
 
 	for (i = l2 - 1; i >= 0; i--)
 	{
-		a = _mul(s1, s2[i]);
-		b = add_zeros(a, l2 - i - 1);
-		add(r, b, r);
-		free(b);
+		
+		_mul(s1, s2[i], a);
+		add_zeros(a, l2 - 1 - i);
+		add(r, a, r);
+		zero(a, l1 + l2);
 	}
-
+	free(a);
 	return (r);
 }
 
