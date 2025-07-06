@@ -167,7 +167,6 @@ char *mul(char *s1, char *s2)
 
 	for (i = l2 - 1; i >= 0; i--)
 	{
-		
 		_mul(s1, s2[i], a);
 		add_zeros(a, l2 - 1 - i);
 		add(r, a, r);
