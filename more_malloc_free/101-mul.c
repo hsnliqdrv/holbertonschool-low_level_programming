@@ -134,6 +134,7 @@ char *_mul(char *s, char d)
 {
 	int l = len(s), i, a, b = d - '0', c = 0;
 	char *r = malloc(l + 2);
+
 	r[l + 1] = '\0';
 	zero(r, l + 1);
 	for (i = l - 1; i >= 0; i--)
