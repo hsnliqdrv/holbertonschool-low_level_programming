@@ -1,4 +1,4 @@
-#include "function_pointers.h"
+#include <stdlib.h>
 /**
  * array_iterator - execute function on each element
  * @array: array
