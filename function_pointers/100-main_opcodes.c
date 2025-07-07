@@ -1,8 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * main - main function
+ * @argc: argument count
+ * @argv: argument array
+ *
+ * Return: 0 if successful, anything else if error
+ */
 int main(int argc, char **argv)
 {
+	unsigned char *opcodes = (unsigned char *)main;
 	int c, i;
 
 	if (argc != 2)
@@ -16,7 +24,6 @@ int main(int argc, char **argv)
 		puts("Error");
 		return (2);
 	}
-	unsigned char *opcodes = (unsigned char *)main;
 	for (i = 0; i < c; i++)
 	{
 		printf("%02x", opcodes[i]);
