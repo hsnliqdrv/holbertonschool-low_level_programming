@@ -2,11 +2,14 @@
 #include <stdio.h>
 /**
  * count_formats - prints one
- * @format - string
+ * @format: string
+ *
+ * Return: count of format specifiers (s,f,i,c)
  */
 int count_formats(const char * const format)
 {
 	int c = 0, i = 0;
+
 	while (format[i])
 	{
 		switch (format[i])
@@ -43,7 +46,7 @@ void print_all(const char * const format, ...)
 	{
 		int is_format = 0;
 
-		switch(format[i])
+		switch (format[i])
 		{
 			case 'c':
 				is_format = 1;
@@ -57,13 +60,15 @@ void print_all(const char * const format, ...)
 				is_format = 1;
 				printf("%f", va_arg(list, double));
 				break;
-			case 's':	
+			case 's':
 				s = va_arg(list, char *);
 				is_format = 1;
 				if (s == NULL)
+				{
 					printf("(nil)");
-				else
-					printf("%s", s);
+					break;
+				}
+				printf("%s", s);
 				break;
 		}
 		if (c < l - 1 && is_format)
