@@ -37,11 +37,19 @@ int count_formats(const char * const format)
  */
 void print_all(const char * const format, ...)
 {
-	int i = 0, l = count_formats(format), c = 0;
+	int i = 0, l, c = 0, is_null;
 	char *s;
 	va_list list;
 
 	va_start(list, format);
+	is_null = format == NULL;
+	switch (is_null)
+	{
+		case 1:
+			printf("\n");
+			return;
+	}
+	l = count_formats(format);
 	while (format[i])
 	{
 		int is_format = 0;
