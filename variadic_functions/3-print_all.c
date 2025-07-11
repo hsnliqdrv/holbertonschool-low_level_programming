@@ -10,6 +10,11 @@ int count_formats(const char * const format)
 {
 	int c = 0, i = 0;
 
+	switch (format == NULL)
+	{
+		case 1:
+			return (c);
+	}
 	while (format[i])
 	{
 		switch (format[i])
@@ -37,40 +42,27 @@ int count_formats(const char * const format)
  */
 void print_all(const char * const format, ...)
 {
-	int i = 0, l, c = 0, is_null;
+	int i = 0, l = count_formats(format), c = 0, is_format;
 	char *s;
 	va_list list;
 
 	va_start(list, format);
-	is_null = format == NULL;
-	switch (is_null)
+	while (c < l && format[i])
 	{
-		case 1:
-			printf("\n");
-			return;
-	}
-	l = count_formats(format);
-	while (format[i])
-	{
-		int is_format = 0;
-
+		is_format = 1;
 		switch (format[i])
 		{
 			case 'c':
-				is_format = 1;
 				printf("%c", va_arg(list, int));
 				break;
 			case 'i':
-				is_format = 1;
 				printf("%i", va_arg(list, int));
 				break;
 			case 'f':
-				is_format = 1;
 				printf("%f", va_arg(list, double));
 				break;
 			case 's':
 				s = va_arg(list, char *);
-				is_format = 1;
 				if (s == NULL)
 				{
 					printf("(nil)");
@@ -78,6 +70,8 @@ void print_all(const char * const format, ...)
 				}
 				printf("%s", s);
 				break;
+			default:
+				is_format = 0;
 		}
 		if (c < l - 1 && is_format)
 			printf(", ");
