@@ -5,7 +5,7 @@
 /**
  * error_97 - handle error
  */
-void error_97()
+void error_97(void)
 {
 	dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 	exit(97);
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		r = read(fds, buffer, 1024);
-		if (r < 0)
+		if (r < 0 || r > 1024)
 			error_98(argv[1]);
 		if (r == 0)
 			break;
