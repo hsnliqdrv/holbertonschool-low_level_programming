@@ -65,11 +65,11 @@ int main(int argc, char **argv)
 			error_98(argv[1]);
 		if (r == 0)
 			break;
-		if (r < 1024 && read(fds, buffer, 1024) != 0)
-			error_98(argv[1]);
 		w = write(fdd, buffer, (size_t) r);
-		if (w < r)
+		if (w < 0)
 			error_99(argv[2]);
+		if (w < r)
+			error_98(argv[1]);
 	}
 	if (close(fds) < 0)
 		error_100(fds);
