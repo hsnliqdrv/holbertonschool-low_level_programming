@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 {
 	int fdd, fds;
 	char buffer[1024];
-	ssize_t r, w;
+	ssize_t r, w, wi;
 
 	if (argc != 3)
 		error_97();
@@ -59,16 +59,22 @@ int main(int argc, char **argv)
 	fdd = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
 	if (fdd < 0)
 		error_99(argv[2]);
-	errno = 0;
 	while (1)
 	{
 		r = read(fds, buffer, 1024);
-		if (errno || r < 0 || r > 1024)
+		if (r < 0 || r > 1024)
 			error_98(argv[1]);
 		if (r == 0)
 			break;
-		w = write(fdd, buffer, (size_t) r);
-		if (errno || w < r || w < 0)
+		wi = 0;
+		while (wi < r)
+		{
+			w = write(fdd, buffer, (size_t) r);
+			if (w < 0)
+				error_99(argv[2]);
+			wi += w;
+		}
+		if (wi != r)
 			error_99(argv[2]);
 	}
 	if (close(fds) < 0)
