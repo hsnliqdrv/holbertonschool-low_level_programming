@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 /**
  * error_97 - handle error
  */
@@ -58,18 +59,17 @@ int main(int argc, char **argv)
 	fdd = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
 	if (fdd < 0)
 		error_99(argv[2]);
+	errno = 0;
 	while (1)
 	{
 		r = read(fds, buffer, 1024);
-		if (r < 0 || r > 1024)
+		if (errno || r < 0 || r > 1024)
 			error_98(argv[1]);
 		if (r == 0)
 			break;
 		w = write(fdd, buffer, (size_t) r);
-		if (w < 0)
+		if (errno || w < r || w < 0)
 			error_99(argv[2]);
-		if (w < r)
-			error_98(argv[1]);
 	}
 	if (close(fds) < 0)
 		error_100(fds);
