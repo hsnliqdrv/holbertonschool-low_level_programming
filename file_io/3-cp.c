@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 		wi = 0;
 		while (wi < r)
 		{
-			w = write(fdd, buffer, (size_t) r);
+			w = write(fdd, buffer + wi, r - wi);
 			if (w < 0)
 				error_99(argv[2]);
 			wi += w;
